@@ -84,8 +84,38 @@ internal class Program
         var car = carInventory.FirstOrDefault(c => c.Id == id);
         if (car != null)
         {
-            carInventory.Remove(car);
-            Console.WriteLine("Auto eliminado con éxito!");
+            Console.WriteLine($"Marca: {car.Make}");
+
+            Console.WriteLine($"Modelo: {car.Model}");
+
+            Console.WriteLine($"Año: {car.Year}");
+
+            Console.WriteLine($"Número de Serie: {car.VIN}");
+
+            Console.WriteLine($"Kilometraje: {car.Mileage}");
+
+            Console.WriteLine($"Color: {car.Color}");
+
+            Console.WriteLine($"Placa: {car.LicensePlate}");
+            Console.WriteLine();
+
+            Console.Write("Deseas eliminar el automóvil? (S/N):");
+
+            input = Console.ReadLine();
+            input ??= "";
+            switch (input.ToUpper())
+            {
+                case "S":
+                    carInventory.Remove(car);
+                    Console.WriteLine("Auto eliminado con éxito!");
+                    break;
+                case "N":
+                    Console.WriteLine("Operación cancelada!");
+                    break;
+                default:
+                    Console.WriteLine("Opción inválida.");
+                    break;
+            }
         }
         else
         {
