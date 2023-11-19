@@ -207,18 +207,25 @@ internal class Program
     {
         Console.Write("Criterio de búsqueda: ");
         var input = Console.ReadLine();
-        if (string.IsNullOrEmpty(input)) { input = ""; }
-        string searchTerm = input.ToLower();
+        List<Car> searchResults = new List<Car>();
 
-        var searchResults = carInventory.Where(car =>
-            car.Make.ToLower().Contains(searchTerm) ||
-            car.Model.ToLower().Contains(searchTerm) ||
-            car.VIN.ToLower().Contains(searchTerm) ||
-            car.Color.ToLower().Contains(searchTerm) ||
-            car.LicensePlate.ToLower().Contains(searchTerm) ||
-            car.Year.ToString().Contains(searchTerm) ||
-            car.Mileage.ToString().Contains(searchTerm)
-        ).ToList();
+        if (string.IsNullOrEmpty(input))
+        {
+            searchResults = carInventory;
+        } else
+        {
+            string searchTerm = input.ToLower();
+
+            searchResults = carInventory.Where(car =>
+                car.Make.ToLower().Contains(searchTerm) ||
+                car.Model.ToLower().Contains(searchTerm) ||
+                car.VIN.ToLower().Contains(searchTerm) ||
+                car.Color.ToLower().Contains(searchTerm) ||
+                car.LicensePlate.ToLower().Contains(searchTerm) ||
+                car.Year.ToString().Contains(searchTerm) ||
+                car.Mileage.ToString().Contains(searchTerm)
+            ).ToList();
+        }        
 
         if (searchResults.Any())
         {
